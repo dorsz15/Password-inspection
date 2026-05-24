@@ -1,68 +1,88 @@
-import { useState } from 'react'
-import { zxcvbn, zxcvbnOptions} from '@zxcvbn-ts/core';
-import type { ZxcvbnResult } from '@zxcvbn-ts/core';
-import { translations } from '@zxcvbn-ts/language-en';
-import './App.css'
 
-zxcvbnOptions.setOptions({
-  translations: translations,
-});
+import { useState } from 'react';
+import './App.css';
+import PasswordAnalyzer from './components/PasswordAnalyzer';
+import PasswordGenerator from './components/PasswordGenerator';
+import Footer from './components/Footer';
 
 function App() {
-  const [password, setPassword] = useState('')
-  const [strengthResult, setStrengthResult] = useState<ZxcvbnResult | null>(null)
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = event.target.value;
-    setPassword(newPassword);
-    if (newPassword.length > 0){
-      const result = zxcvbn(newPassword);
-      setStrengthResult(result);
-    }
-    else{
-      setStrengthResult(null)
-    }
-  }
 
-  const score = strengthResult?.score ?? 0;
-  const timeToCrack = strengthResult?.crackTimesDisplay?.offlineFastHashing1e10PerSecond ?? '';
-
+  const [analyzedPassword, setAnalyzedPassword] = useState('');
+  const handleSendToAnalyzer = (password: string) => {
+    setAnalyzedPassword(password);
+    
+    window.scrollTo({
+      top: 100,
+      behavior: 'smooth'
+    });
+  };
   return (
     <>
-      <section id="center">
-        <div>
-          <h2>CHECK THE STRENGTH OF YOUR</h2>
-          <h1>PASSWORD</h1>
+      <div className="app-container">  
+        <div className="dashboard-layout">
+          <PasswordAnalyzer 
+          externalPassword={analyzedPassword} 
+          onPasswordChange={setAnalyzedPassword}/>
+          <hr className="app-divider" />
+          <PasswordGenerator 
+          onSendToAnalyzer={handleSendToAnalyzer}/>
+          <hr className="app-divider" />
         </div>
-      <div className="input-wrapper">
-        <input
-          type="password"
-          placeholder="Enter password..."
-          value={password}
-          onChange={handleInputChange}
-          className="password-input"
-        />
-        <div className="input-icons-container">
-          <span className="icon-placeholder">✕</span>
-          <span className="icon-placeholder">👁</span>
-        </div>
+
+        {/* Sekcja: Why make a secure password */}
+        <section className="info-section">
+          <h2 className="info-title">WHY MAKE A SECURE PASSWORD?</h2>
+          <div className="info-content">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in dictum nulla. 
+              Cras vestibulum mollis enim tristique commodo. Interdum et malesuada fames 
+              ac ante ipsum primis in faucibus. Aliquam purus eros, imperdiet et faucibus 
+              vehicula, facilisis in tellus. Proin id est vel dolor efficitur scelerisque 
+              at eget sem. In sagittis magna eu ex rhoncus commodo. Vestibulum convallis 
+              venenatis ante ac egestas.
+            </p>
+            <p>
+              Morbi id mauris sodales, fringilla odio et, viverra tellus. Phasellus vel 
+              aliquet urna. Sed lacinia risus id mattis commodo. Nulla gravida vulputate 
+              nunc non dignissim. Sed nisl odio, ornare sit amet tristique a, malesuada 
+              at nunc. Duis interdum sem mi, nec tincidunt dui consequat sed. Mauris a 
+              leo et mauris dapibus pellentesque. Nullam commodo convallis nulla non suscipit.
+            </p>
+            <p>
+              Donec aliquet dignissim nisi ut sodales. Duis faucibus facilisis vulputate. 
+              Sed ultrices gravida ante eu ornare. Aliquam sagittis eu justo id aliquam. 
+              Donec lacinia vel erat ut cursus. Duis tempor massa porta, pellentesque diam et, 
+              porta sapien. Nunc quis porta eros. Nam cursus dui vitae eros congue scelerisque. 
+              Pellentesque vitae scelerisque nisl, sed egestas odio. Aliquam in justo lacus. 
+              Nullam efficitur nulla eget eros porta, et posuere tellus elementum. Nulla a magna 
+              eu neque facilisis gravida. Suspendisse maximus purus a consequat lobortis. 
+              Nulla facilisi. Phasellus finibus quis turpis ac porttitor.
+            </p>
+          </div>
+        </section>
+
+        <hr className="app-divider" />
+
+        {/* Sekcja: Fun facts */}
+        <section className="info-section">
+          <h2 className="info-title">FUN FACTS ABOUT PASSWORD SECURITY</h2>
+          <div className="info-content">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in dictum nulla. 
+              Cras vestibulum mollis enim tristique commodo. Interdum et malesuada fames 
+              ac ante ipsum primis in faucibus. Aliquam purus eros, imperdiet et faucibus 
+              vehicula, facilisis in tellus. Proin id est vel dolor efficitur scelerisque 
+              at eget sem. In sagittis magna eu ex rhoncus commodo. Vestibulum convallis 
+              venenatis ante ac egestas.
+            </p>
+          </div>
+        </section>
       </div>
-      {password.length > 0 && (
-        <div className="result-container">
-          
-          <div className="progress-bar-container">
-            <div className="progress-bar-fill" data-score={score}></div>
-          </div>
 
-          <div className="result-text-box">
-            <span className="result-label">ESTIMATED TIME TO CRACK:</span>
-            <span className="crack-time-value">{timeToCrack}</span>
-          </div>
-
-        </div>
-      )}
-      </section>
-      <section id="spacer"></section></>
-  )
+      {/* Stopka*/}
+      <Footer />
+    </>
+  );
 }
 
-export default App
+export default App;
