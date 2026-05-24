@@ -1,0 +1,156 @@
+.metrics-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 25px auto 0 auto;
+  text-align: left;
+}
+
+.metrics-title {
+  color: var(--text-h);
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 15px 0;
+}
+
+/* Główny kontener na metryki */
+.metrics-main-box {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background-color: transparent;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.metrics-table {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cały pojedynczy rząd metryki */
+.metrics-row {
+  display: flex;
+  align-items: center;
+  padding: 14px 24px;
+  position: relative;
+}
+
+/* Pozioma linia oddzielająca rzędy */
+.metrics-row:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background-color: rgba(28, 35, 66, 0.4);
+}
+
+/* LEWA STRONA RZĘDU: tekst + liczba + pionowa linia */
+.metric-info-side {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 35%;
+  padding-right: 24px;
+  position: relative;
+}
+
+.metric-info-side::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -6px;
+  bottom: -6px;
+  width: 1px;
+  background-color: var(--border);
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #566894;
+}
+
+.metric-number {
+  color: var(--text-h);
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* PRAWA STRONA RZĘDU: paski postępu */
+.metric-bar-side {
+  width: 65%;
+  padding-left: 24px;
+}
+
+.metric-progress-bg {
+  width: 100%;
+  height: 10px;
+  background-color: #1f293d;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.metric-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 5px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fill-cyan {
+  background-color: #00f2fe;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+}
+
+.fill-pink {
+  background-color: #f300b4;
+  box-shadow: 0 0 10px rgba(243, 0, 180, 0.4);
+}
+
+.fill-blue {
+  background-color: #008aff;
+  box-shadow: 0 0 10px rgba(0, 138, 255, 0.4);
+}
+
+.fill-indigo {
+  background-color: #3b66ff;
+  box-shadow: 0 0 10px rgba(59, 102, 255, 0.4);
+}
+
+.fill-red {
+  background-color: #ff0043;
+  box-shadow: 0 0 10px rgba(255, 0, 67, 0.4);
+}
+
+/* DOLNY BADGE: Overall score */
+.overall-score-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.overall-score-badge {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 10px 24px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background-color: transparent;
+}
+
+.overall-label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #566894;
+}
+
+.overall-number {
+  color: var(--text-h);
+  font-weight: 900;
+  font-size: 1rem;
+}

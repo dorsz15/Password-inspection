@@ -1,0 +1,89 @@
+import './ScoreMetrics.css';
+
+interface ScoreMetricsProps {
+  strengthResult: any;
+}
+
+export default function ScoreMetrics({ strengthResult }: ScoreMetricsProps) {
+  // Funkcja obliczająca wartości poszczególnych pasków (skala 0.0 do 1.0)
+  const calculateMetrics = () => {
+  if (!strengthResult || !strengthResult.sequence) {
+    return { hardToCrack: 0, complexity: 0, dictionary: 0, spatial: 0, ngram: 0, overall: 0 };
+  }
+
+  const hardToCrack = strengthResult.score / 4;
+
+  const currentLog = strengthResult.guessesLog10 !== undefined 
+    ? strengthResult.guessesLog10 
+    : (strengthResult.guesses_log10 || 0);
+  const complexity = Math.min(currentLog / 12, 1);
+
+  const passwordLength = strengthResult.password ? strengthResult.password.length : 0;
+  // Bazowy progres od 0 do 1 uzależniony od długości (np. pełna odporność przy 14 znakach)
+  const lengthBonus = Math.min(passwordLength / 14, 1);
+
+  const segments = strengthResult.sequence;
+  const hasDictionary = segments.some((s: any) => s.pattern === 'dictionary');
+  const hasSpatialOrSequence = segments.some((s: any) => s.pattern === 'spatial' || s.pattern === 'sequence');
+  const hasRepeat = segments.some((s: any) => s.pattern === 'repeat');
+
+  // 3. Dictionary Resistance: rośnie z długością, ale jeśli wykryje słowo ze słownika -> spada do 0.1
+  const dictionary = hasDictionary ? 0.1 : lengthBonus;
+
+  // 4. Spacial Patterns: rośnie z długością, ale jeśli wykryje sekwencję klawiszy -> spada do 0.1
+  const spatial = hasSpatialOrSequence ? 0.1 : lengthBonus;
+
+  // 5. N-Gram Frequency: rośnie z długością, ale jeśli wykryje powtórzenia znaków -> spada silnie w dół
+  const ngram = hasRepeat ? 0.1 : Math.min(lengthBonus * 1.1, 1); // nieco szybszy wzrost
+
+  // Uśredniony wynik ogólny
+  const overall = (hardToCrack + complexity + dictionary + spatial + ngram) / 5;
+
+  return { hardToCrack, complexity, dictionary, spatial, ngram, overall };
+};
+
+  const metrics = calculateMetrics();
+
+  const metricsList = [
+    { label: 'HARD TO CRACK', value: metrics.hardToCrack, colorClass: 'fill-cyan' },
+    { label: 'COMPLEXITY', value: metrics.complexity, colorClass: 'fill-pink' },
+    { label: 'DICTIONARY RESISTANCE', value: metrics.dictionary, colorClass: 'fill-blue' },
+    { label: 'SPACIAL PATTERNS', value: metrics.spatial, colorClass: 'fill-indigo' },
+    { label: 'N-GRAM FREQUENCY', value: metrics.ngram, colorClass: 'fill-red' },
+  ];
+
+  return (
+    <section className="metrics-wrapper">
+      <h3 className="metrics-title">SCORE METRICS</h3>
+      
+      <div className="metrics-main-box">
+        <div className="metrics-table">
+          {metricsList.map((item, index) => (
+            <div className="metrics-row" key={index}>
+              <div className="metric-info-side">
+                <span className="metric-label">{item.label}</span>
+                <span className="metric-number">{item.value.toFixed(1)}</span>
+              </div>
+              
+              <div className="metric-bar-side">
+                <div className="metric-progress-bg">
+                  <div 
+                    className={`metric-progress-fill ${item.colorClass}`} 
+                    style={{ width: `${item.value * 100}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="overall-score-container">
+        <div className="overall-score-badge">
+          <span className="overall-label">OVERALL SCORE</span>
+          <span className="overall-number">{metrics.overall.toFixed(1)}</span>
+        </div>
+      </div>
+    </section>
+  );
+}
