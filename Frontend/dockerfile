@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # 6. Informuje, że aplikacja działa na porcie 3000
-EXPOSE 3000
+EXPOSE 5137
 
 # 7. Odpala serwer deweloperski Reacta
 CMD ["npm", "run", "dev", "--", "--host"]
