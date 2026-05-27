@@ -31,52 +31,44 @@ function App() {
 
         {/* Sekcja: Why make a secure password */}
         <section className="info-section">
-          <h2 className="info-title">WHY MAKE A SECURE PASSWORD?</h2>
-          <div className="info-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in dictum nulla. 
-              Cras vestibulum mollis enim tristique commodo. Interdum et malesuada fames 
-              ac ante ipsum primis in faucibus. Aliquam purus eros, imperdiet et faucibus 
-              vehicula, facilisis in tellus. Proin id est vel dolor efficitur scelerisque 
-              at eget sem. In sagittis magna eu ex rhoncus commodo. Vestibulum convallis 
-              venenatis ante ac egestas.
-            </p>
-            <p>
-              Morbi id mauris sodales, fringilla odio et, viverra tellus. Phasellus vel 
-              aliquet urna. Sed lacinia risus id mattis commodo. Nulla gravida vulputate 
-              nunc non dignissim. Sed nisl odio, ornare sit amet tristique a, malesuada 
-              at nunc. Duis interdum sem mi, nec tincidunt dui consequat sed. Mauris a 
-              leo et mauris dapibus pellentesque. Nullam commodo convallis nulla non suscipit.
-            </p>
-            <p>
-              Donec aliquet dignissim nisi ut sodales. Duis faucibus facilisis vulputate. 
-              Sed ultrices gravida ante eu ornare. Aliquam sagittis eu justo id aliquam. 
-              Donec lacinia vel erat ut cursus. Duis tempor massa porta, pellentesque diam et, 
-              porta sapien. Nunc quis porta eros. Nam cursus dui vitae eros congue scelerisque. 
-              Pellentesque vitae scelerisque nisl, sed egestas odio. Aliquam in justo lacus. 
-              Nullam efficitur nulla eget eros porta, et posuere tellus elementum. Nulla a magna 
-              eu neque facilisis gravida. Suspendisse maximus purus a consequat lobortis. 
-              Nulla facilisi. Phasellus finibus quis turpis ac porttitor.
-            </p>
-          </div>
-        </section>
+        <h2 className="info-title">WHY MAKE A SECURE PASSWORD?</h2>
+        <div className="info-content">
+          <p>
+            Your password is the first line of defense against cyber threats. In an era where 
+            data breaches occur daily, using weak or recycled passwords leaves your personal 
+            information, financial accounts, and digital identity highly vulnerable to hackers. 
+            A robust password acts as a strong barrier, significantly reducing the risk of unauthorized access.
+          </p>
+          <p>
+            Automated cyberattacks, such as brute-force and dictionary attacks, can crack simple passwords 
+            in a matter of seconds. By incorporating a mix of upper and lowercase letters, numbers, and 
+            special characters, you exponentially increase the complexity and entropy of your credentials, 
+            making it mathematically exhausting for malicious scripts to guess them.
+          </p>
+          <p>
+            Securing your accounts goes beyond protecting just yourself. Compromised accounts are 
+            frequently used to spread malware, launch phishing campaigns against your contacts, or gain 
+            footholds into corporate networks. Investing a few moments into creating unique, complex 
+            passwords is a crucial step toward building a safer digital environment for everyone.
+          </p>
+        </div>
+      </section>
 
-        <hr className="app-divider" />
+      <hr className="app-divider" />
 
-        {/* Sekcja: Fun facts */}
-        <section className="info-section">
-          <h2 className="info-title">FUN FACTS ABOUT PASSWORD SECURITY</h2>
-          <div className="info-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in dictum nulla. 
-              Cras vestibulum mollis enim tristique commodo. Interdum et malesuada fames 
-              ac ante ipsum primis in faucibus. Aliquam purus eros, imperdiet et faucibus 
-              vehicula, facilisis in tellus. Proin id est vel dolor efficitur scelerisque 
-              at eget sem. In sagittis magna eu ex rhoncus commodo. Vestibulum convallis 
-              venenatis ante ac egestas.
-            </p>
-          </div>
-        </section>
+      {/* Sekcja: Fun facts */}
+      <section className="info-section">
+        <h2 className="info-title">FUN FACTS ABOUT PASSWORD SECURITY</h2>
+        <div className="info-content">
+          <p>
+            Did you know that adding just one uppercase letter and a single special character can turn 
+            a password that takes seconds to crack into one that takes years? Furthermore, long phrases 
+            (passphrases) are often much more secure and easier to remember than short, complex strings. 
+            Despite constant warnings, studies show that "123456" and "password" still consistently rank 
+            as the most commonly used passwords worldwide every single year.
+          </p>
+        </div>
+      </section>
       </div>
 
       {/* Stopka*/}

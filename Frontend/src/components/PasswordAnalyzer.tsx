@@ -2,7 +2,8 @@ import {useEffect, useState } from 'react'
 import { zxcvbn, zxcvbnOptions} from '@zxcvbn-ts/core';
 import type { ZxcvbnResult } from '@zxcvbn-ts/core';
 import { translations } from '@zxcvbn-ts/language-en';
-import { adjacencyGraphs, dictionary } from '@zxcvbn-ts/language-common';
+import { adjacencyGraphs, dictionary as commonDictionary } from '@zxcvbn-ts/language-common';
+import { dictionary as plDictionary, translations as plTranslations } from '@zxcvbn-ts/language-pl';
 import './PasswordAnalyzer.css'
 import ScoreMetrics from './ScoreMetrics';
 import { Eye, EyeOff, X } from 'lucide-react';
@@ -10,7 +11,8 @@ import { Eye, EyeOff, X } from 'lucide-react';
 zxcvbnOptions.setOptions({
   translations: translations,
   dictionary: {
-    ...dictionary,
+    ...commonDictionary,
+    ...plDictionary,
   },
   graphs: adjacencyGraphs,
 });
@@ -49,7 +51,8 @@ export default function PasswordAnalyzer({ externalPassword, onPasswordChange }:
     runAnalysis(externalPassword);
   }, [externalPassword]);
   const score = strengthResult?.score ?? 0;
-  const timeToCrack = strengthResult?.crackTimesDisplay?.offlineFastHashing1e10PerSecond ?? '';
+  //const timeToCrack = strengthResult?.crackTimesDisplay?.offlineFastHashing1e10PerSecond ?? '';
+  const timeToCrackSlow = strengthResult?.crackTimesDisplay?.offlineSlowHashing1e4PerSecond ?? '';
 
 return (
     <>
@@ -94,7 +97,7 @@ return (
 
           <div className="result-text-box">
             <span className="result-label">ESTIMATED TIME TO CRACK:</span>
-            <span className="crack-time-value">{timeToCrack}</span>
+            <span className="crack-time-value">{timeToCrackSlow}</span>
           </div>
         </div>
       )
