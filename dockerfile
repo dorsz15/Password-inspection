@@ -13,8 +13,8 @@ RUN npm install
 # 5. Kopiuje całą resztę kodu źródłowego
 COPY . .
 
-# 6. Informuje, że aplikacja działa na porcie 5173
-EXPOSE 5173
+# 6. Informuje, że aplikacja działa na porcie 5137
+EXPOSE 5137
 
 # 7. Odpala serwer deweloperski Reacta
 CMD ["npm", "run", "dev", "--", "--host"]
