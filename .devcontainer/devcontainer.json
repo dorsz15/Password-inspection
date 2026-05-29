@@ -1,0 +1,7 @@
+{
+  "name": "Password Fortress Dev Box",
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "web",
+  "workspaceFolder": "/app",
+  "remoteUser": "node"
+}

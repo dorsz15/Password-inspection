@@ -1,1 +1,0 @@
-C:\Users\magda\Documents\GitHub\Password-inspection\password_inspector_app\password_inspector_app\password_inspector_app.Client\obj\Debug\net8.0\staticwebassets.build.json
