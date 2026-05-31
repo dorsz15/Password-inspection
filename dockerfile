@@ -16,5 +16,8 @@ COPY . .
 # 6. Informuje, że aplikacja działa na porcie 5173
 EXPOSE 5173
 
-# 7. Odpala serwer deweloperski Reacta
+# 7. Nadajemy uprawnienia roota
+RUN chown -R node:node /app
+
+# 8. Odpala serwer deweloperski Reacta
 CMD ["npm", "run", "dev", "--", "--host"]

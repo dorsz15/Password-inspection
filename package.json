@@ -10,10 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.67",
+    "@google/generative-ai": "^0.24.1",
+    "@react-three/drei": "^10.7.7",
     "@zxcvbn-ts/core": "^3.0.4",
     "@zxcvbn-ts/language-common": "^3.0.4",
     "@zxcvbn-ts/language-en": "^3.0.2",
     "@zxcvbn-ts/language-pl": "^3.0.2",
+    "ai": "^6.0.193",
     "generate-password-ts": "^1.6.5",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",

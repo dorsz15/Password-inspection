@@ -5,22 +5,22 @@ interface ScoreMetricsProps {
 }
 
 export default function ScoreMetrics({ strengthResult }: ScoreMetricsProps) {
-  // Funkcja obliczająca wartości poszczególnych pasków (skala 0.0 do 1.0)
+  // Funkcja obliczająca wartości poszczególnych pasków (skala 0.0 do 10.0)
   const calculateMetrics = () => {
   if (!strengthResult || !strengthResult.sequence) {
     return { hardToCrack: 0, complexity: 0, dictionary: 0, spatial: 0, ngram: 0, overall: 0 };
   }
 
-  const hardToCrack = strengthResult.score / 4;
+  const hardToCrack = (strengthResult.score / 4)*10;
 
   const currentLog = strengthResult.guessesLog10 !== undefined 
     ? strengthResult.guessesLog10 
     : (strengthResult.guesses_log10 || 0);
-  const complexity = Math.min(currentLog / 12, 1);
+  const complexity = Math.min((currentLog / 12)*10, 10);
 
   const passwordLength = strengthResult.password ? strengthResult.password.length : 0;
   // Bazowy progres od 0 do 1 uzależniony od długości (np. pełna odporność przy 14 znakach)
-  const lengthBonus = Math.min(passwordLength / 14, 1);
+  const lengthBonus = Math.min((passwordLength / 14)*10, 10);
 
   const segments = strengthResult.sequence;
   const hasDictionary = segments.some((s: any) => s.pattern === 'dictionary');
@@ -28,13 +28,13 @@ export default function ScoreMetrics({ strengthResult }: ScoreMetricsProps) {
   const hasRepeat = segments.some((s: any) => s.pattern === 'repeat');
 
   // 3. Dictionary Resistance: rośnie z długością, ale jeśli wykryje słowo ze słownika -> spada do 0.1
-  const dictionary = hasDictionary ? 0.1 : lengthBonus;
+  const dictionary = hasDictionary ? 1 : lengthBonus;
 
   // 4. Spacial Patterns: rośnie z długością, ale jeśli wykryje sekwencję klawiszy -> spada do 0.1
-  const spatial = hasSpatialOrSequence ? 0.1 : lengthBonus;
+  const spatial = hasSpatialOrSequence ? 1 : lengthBonus;
 
   // 5. N-Gram Frequency: rośnie z długością, ale jeśli wykryje powtórzenia znaków -> spada silnie w dół
-  const ngram = hasRepeat ? 0.1 : Math.min(lengthBonus * 1.1, 1); // nieco szybszy wzrost
+  const ngram = hasRepeat ? 1 : Math.min(lengthBonus * 1.1, 10); // nieco szybszy wzrost
 
   // Uśredniony wynik ogólny
   const overall = (hardToCrack + complexity + dictionary + spatial + ngram) / 5;

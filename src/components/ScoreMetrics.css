@@ -1,7 +1,6 @@
 .metrics-wrapper {
-  width: 100%;
-  max-width: 900px;
-  margin: 25px auto 0 auto;
+  width: 950px;
+  margin: 100px auto 0 auto;
   text-align: left;
 }
 
@@ -15,9 +14,9 @@
 
 /* Główny kontener na metryki */
 .metrics-main-box {
-  border: 1px solid var(--border);
+  border: 1px solid var(--text);
   border-radius: 20px;
-  background-color: transparent;
+  background-color: var(--bg-container);
   overflow: hidden;
   padding: 10px 0;
 }
@@ -43,7 +42,7 @@
   left: 24px;
   right: 24px;
   height: 1px;
-  background-color: rgba(28, 35, 66, 0.4);
+  background-color: var(--input);
 }
 
 /* LEWA STRONA RZĘDU: tekst + liczba + pionowa linia */
@@ -63,14 +62,14 @@
   top: -6px;
   bottom: -6px;
   width: 1px;
-  background-color: var(--border);
+  background-color: var(--input);
 }
 
 .metric-label {
   font-size: 0.85rem;
   font-weight: bold;
   letter-spacing: 0.5px;
-  color: #566894;
+  color: var(--text);
 }
 
 .metric-number {
@@ -133,7 +132,7 @@
 }
 
 .overall-score-badge {
-  border: 1px solid var(--border);
+  border: 1px solid var(--text);
   border-radius: 20px;
   padding: 10px 24px;
   display: flex;
@@ -146,7 +145,7 @@
   font-size: 0.85rem;
   font-weight: bold;
   letter-spacing: 0.5px;
-  color: #566894;
+  color: var(--text);
 }
 
 .overall-number {

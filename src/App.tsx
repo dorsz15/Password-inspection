@@ -1,12 +1,16 @@
+import { useState} from 'react';
+import { Canvas } from '@react-three/fiber';
+import { scrollToSection } from './Navigator';
+import {KeyRound, ChartBar, Dices, ShieldHalf, Users} from 'lucide-react';
 
-import { useState } from 'react';
 import './App.css';
 import PasswordAnalyzer from './components/PasswordAnalyzer';
 import PasswordGenerator from './components/PasswordGenerator';
 import Footer from './components/Footer';
+import Particles from './components/Particles';
 
 function App() {
-
+  
   const [analyzedPassword, setAnalyzedPassword] = useState('');
   const handleSendToAnalyzer = (password: string) => {
     setAnalyzedPassword(password);
@@ -16,18 +20,73 @@ function App() {
       behavior: 'smooth'
     });
   };
+
+
   return (
     <>
+    {/* Nawigacja*/}
+    <nav className="navbar">
+
+      {/*logo*/}
+      <div className="navbar-logo">
+        <ShieldHalf size={20} className='nav-icon' color='#7284b0'/>
+        PASSWORD CHECKER
+      </div>
+
+      <div className="navbar-buttons">
+        {/* Button to password*/}
+        <button className="navbar-button" 
+                onClick={() => scrollToSection('enter-password')}>
+          <KeyRound size={20} className="nav-icon" />
+          PASSWORD
+        </button>
+
+        {/* Button to metrics*/}
+        <button className="navbar-button" 
+                onClick={() => scrollToSection('metrics')}>
+          <ChartBar size={20} className="nav-icon" />
+          METRICS
+        </button>
+
+        {/* Button to generator*/}
+        <button className="navbar-button" 
+                onClick={() => scrollToSection('generator')}>
+          <Dices size={20} className="nav-icon" />
+          GENERATOR
+        </button>
+
+        {/* Button to  github*/}
+        <button className="navbar-button" 
+                onClick={() => scrollToSection('authors')}>
+          <Users size={20} className="nav-icon" />
+          CREATORS
+        </button>
+      </div>
+
+    </nav>
+
+      <div className="blob-container">
+        {/*
+          <Canvas camera={{ position: [0, 0, 5] }}>
+            <Particles />
+          </Canvas>
+          */}
+      </div>
+
+      <div id="enter-password"/>
       <div className="app-container">  
-        <div className="dashboard-layout">
+
           <PasswordAnalyzer 
-          externalPassword={analyzedPassword} 
-          onPasswordChange={setAnalyzedPassword}/>
-          <hr className="app-divider" />
+            externalPassword={analyzedPassword} 
+            onPasswordChange={setAnalyzedPassword}/>
+
+          <div id="generator"/>
+          <div className="app-divider"/>
+
           <PasswordGenerator 
-          onSendToAnalyzer={handleSendToAnalyzer}/>
-          <hr className="app-divider" />
-        </div>
+            onSendToAnalyzer={handleSendToAnalyzer}/>
+          
+          <div className="app-divider" />
 
         {/* Sekcja: Why make a secure password */}
         <section className="info-section">
@@ -70,7 +129,8 @@ function App() {
         </div>
       </section>
       </div>
-
+      
+      <div id="authors"/>
       {/* Stopka*/}
       <Footer />
     </>

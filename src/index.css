@@ -1,12 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans+Semi+Condensed:wght@400;500;700&display=swap');
 :root {
   /* ==========================================================================
                                    ZMIENNE KOLORÓW
      ========================================================================== */
-  --text: #a4b3d6;            /* Jasny, lekko niebieskawy kolor tekstu z generatora */
+  --text: #96ADFF;            /* Jasny, lekko niebieskawy kolor tekstu z generatora */
+  --input: #435173;           /*znak zachety do pisania */
+  --blue-text: #7284b0;
   --text-h: #ffffff;          /* Nagłówki */
   --bg: #030214;              /* Głębokie, ciemnogranatowe tło na cały ekran */
+  --bg-light: #130942;        /* Jaśnniejszy granatl do tła*/
+  --bg-light-blue: #110B4D;   /*Jaśniejszy niebieski do tła*/
   --border: #1c2342;          /* Ciemnoniebieska ramka do pigułkowych wierszy */
   --code-bg: #111424;
+  --bg-container: #070323;
   --accent: #3b82f6;          /* Neonowy jasnoniebieski akcent z generatora */
   --accent-bg: #030214;
   --accent-border: #2f56cc;   /* Niebieskie obramowania kółek/inputów */
@@ -14,9 +20,11 @@
   --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 
   /* Typografia i Bazy*/
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: system-ui, 'Sofia Sans Semi Condensed', sans-serif;
+  --heading: system-ui, 'Sofia Sans Semi Condensed', sans-serif;
+  --mono: ui-monospace, 'Sofia Sans Semi Condensed', monospace;
+
+  font-family: var(--sans);
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
@@ -38,7 +46,6 @@
 
 body {
   margin: 0;
-  background-color: var(--bg); /* Gwarantuje nałożenie tła na całe okno */
   overflow-x: hidden;
 }
 
@@ -46,11 +53,10 @@ body {
                                  GŁÓWNY KONTENER
    ========================================================================== */
 #root {
-  width: 1126px;
+  width: 1150px;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border); /* Pionowe linie boczne */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -64,7 +70,7 @@ body {
 h1,
 h2 {
   font-family: var(--heading);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-h);
 }
 
@@ -99,7 +105,7 @@ p {
 /* Kontener całej sekcji informacyjnej na dole */
 .info-section {
   width: 100%;
-  max-width: 900px;
+  max-width: 950px;
   margin: 20px auto 40px auto;
   text-align: left;
 }
@@ -121,7 +127,7 @@ p {
 }
 
 .info-content p {
-  color: #7284b0;
+  color: var(--text);
   font-size: 0.95rem;
   line-height: 1.6;
   text-align: justify;

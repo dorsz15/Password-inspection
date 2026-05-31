@@ -24,3 +24,6 @@ build/
 *.njsproj
 *.sln
 *.sw?
+
+# Pliki z kluczami API (lokalne)
+.env.local
