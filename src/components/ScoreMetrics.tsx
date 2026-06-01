@@ -39,17 +39,27 @@ export default function ScoreMetrics({ strengthResult }: ScoreMetricsProps) {
   // Uśredniony wynik ogólny
   const overall = (hardToCrack + complexity + dictionary + spatial + ngram) / 5;
 
+
+
   return { hardToCrack, complexity, dictionary, spatial, ngram, overall };
 };
 
   const metrics = calculateMetrics();
-
+  
+    const getColorClass = (value: number) => {
+    if (value < 2) return 'fill-red';     // Bardzo słabe
+    if (value < 4) return 'fill-pink';    // Słabe
+    if (value < 6) return 'fill-indigo';  // Średnie
+    if (value < 8) return 'fill-blue';    // Dobre
+    return 'fill-cyan';                  // Bardzo dobre
+  };
+  
   const metricsList = [
-    { label: 'HARD TO CRACK', value: metrics.hardToCrack, colorClass: 'fill-cyan' },
-    { label: 'COMPLEXITY', value: metrics.complexity, colorClass: 'fill-pink' },
-    { label: 'DICTIONARY RESISTANCE', value: metrics.dictionary, colorClass: 'fill-blue' },
-    { label: 'SPACIAL PATTERNS', value: metrics.spatial, colorClass: 'fill-indigo' },
-    { label: 'N-GRAM FREQUENCY', value: metrics.ngram, colorClass: 'fill-red' },
+    { label: 'HARD TO CRACK', value: metrics.hardToCrack },
+    { label: 'COMPLEXITY', value: metrics.complexity},
+    { label: 'DICTIONARY RESISTANCE', value: metrics.dictionary},
+    { label: 'SPACIAL PATTERNS', value: metrics.spatial},
+    { label: 'N-GRAM FREQUENCY', value: metrics.ngram}
   ];
 
   return (
@@ -68,8 +78,8 @@ export default function ScoreMetrics({ strengthResult }: ScoreMetricsProps) {
               <div className="metric-bar-side">
                 <div className="metric-progress-bg">
                   <div 
-                    className={`metric-progress-fill ${item.colorClass}`} 
-                    style={{ width: `${item.value * 100}%` }}
+                    className={`metric-progress-fill ${getColorClass(item.value)}`} 
+                    style={{ width: `${item.value * 10}%` }}
                   ></div>
                 </div>
               </div>

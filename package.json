@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^3.0.67",
+    "@firecms/neat": "^0.8.0",
     "@google/generative-ai": "^0.24.1",
     "@react-three/drei": "^10.7.7",
     "@zxcvbn-ts/core": "^3.0.4",

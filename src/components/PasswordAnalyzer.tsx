@@ -7,9 +7,10 @@ import { dictionary as plDictionary, translations as plTranslations } from '@zxc
 
 import './PasswordAnalyzer.css'
 import './../App.css';
+import './ScoreMetrics'
 
 import ScoreMetrics from './ScoreMetrics';
-import {roastPassword} from './../AiRoaster'
+import {getRandomRoast} from './../AiRoaster'
 import {checkPasswordPwned} from './../ChechForLeak'
 import { Eye, EyeOff, X } from 'lucide-react';
 
@@ -34,11 +35,7 @@ export default function PasswordAnalyzer({ externalPassword, onPasswordChange }:
 
   const [roastMessage, setRoastMessage] = useState<string>('');
 
-  const handleRoastClick = async (result: ZxcvbnResult) => {
-    const patterns = result.sequence.map((s: any) => s.pattern);
-    const roast = await roastPassword(result.score, patterns);
-    setRoastMessage(roast);
-  };
+
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 // Funkcja, która uruchamia bibliotekę zxcvbn
@@ -67,29 +64,52 @@ export default function PasswordAnalyzer({ externalPassword, onPasswordChange }:
 
   useEffect(() => {
 
-  setRoastMessage(''); 
   if (!externalPassword) {
+    setRoastMessage('');
     setStrengthResult(null);
     setIsPwned(null);
     return;
   }
-
+  
   const result = zxcvbn(externalPassword);
   setStrengthResult(result);
-
-  /*Check if password is pawned*/
   checkPasswordPwned(externalPassword).then(setIsPwned);
 
-  const timer = setTimeout(() => {
-    handleRoastClick(result);
-  }, 2000);
+  const newRoast = getRandomRoast(result.score);
+  setRoastMessage(newRoast);
 
-  return () => clearTimeout(timer);
 }, [externalPassword]);
 
   const score = strengthResult?.score ?? 0;
   //const timeToCrack = strengthResult?.crackTimesDisplay?.offlineFastHashing1e10PerSecond ?? '';
   const timeToCrackSlow = strengthResult?.crackTimesDisplay?.offlineSlowHashing1e4PerSecond ?? '';
+
+  const getColorClass = (value: number) => {
+      // Dla skali 0-10:
+      if (value < 2) return 'fill-red';
+      if (value < 4) return 'fill-pink';
+      if (value < 6) return 'fill-indigo';
+      if (value < 8) return 'fill-blue';
+      return 'fill-cyan';
+    };
+
+  const handleFixPassword = () => {
+      if (!externalPassword) return;
+
+      const specialChars = "!@#$%^&*()_+";
+      let improved = externalPassword
+        .split('')
+        .map(char => Math.random() > 0.5 ? char.toUpperCase() : char)
+        .join('');
+      
+      improved += specialChars[Math.floor(Math.random() * specialChars.length)];
+      improved += Math.floor(Math.random() * 10); // dodaje cyfrę
+
+      onPasswordChange(improved);
+      runAnalysis(improved); 
+    };
+
+  
 
 return (
     <>
@@ -97,7 +117,7 @@ return (
         <div >
           <h2 className="analyzer-subtitle">CHECK THE <span className='analyzer-strong'>STRENGTH</span> OF YOUR</h2>
           <h1 className="analyzer-title">PASSWORD</h1>
-          <h2 >"...{roastMessage}"</h2>
+          <h2 >{roastMessage}</h2>
         </div>
       <div className="input-wrapper">
         <input
@@ -125,29 +145,55 @@ return (
             </div>
         </div>
       </div>
-      {externalPassword.length > 0 && (
+
+      {externalPassword.length > 0 && isPwned !== null && (
         <div className="result-container">
-          
+          {/* Pasek postępu */}
           <div className="progress-bar-container">
-            <div className="progress-bar-fill" data-score={score}></div>
+            <div 
+              className={`progress-bar-fill ${getColorClass(score * 2.5)}`} 
+              style={{ width: `${Math.max(Math.min(score * 2.5 * 10, 100), 5)}%` }}
+            ></div>
           </div>
 
+          {/* Oryginalne dane: Czas łamania hasła */}
           <div className="result-text-box">
             <span className="result-label">ESTIMATED TIME TO CRACK:</span>
             <span className="crack-time-value">{timeToCrackSlow}</span>
           </div>
 
+          {/* Security status - wyświetla się zawsze, ale zmienia komunikat */}
           <div className="result-text-box">
             <span className="result-label">SECURITY STATUS:</span>
             <span style={{ color: isPwned ? '#FF0048' : '#4DFFD8', fontWeight: 'bold' }}>
-              {isPwned ? "COMPROMISED (FOUND IN LEAKS!)" : "SAFE (NOT IN LEAKS)"}
+              {isPwned ? "COMPROMISED" : "SAFE (NOT IN LEAKS)"}
             </span>
           </div>
+
+          {/* Sekcja "Szoku" - wyświetla się tylko jeśli wyciekło */}
+          {isPwned && (
+            <div className="shock-factor-container">
+              <h2 className="shock-title animate-pulse">YOUR PASSWORD IS ON THE DARK WEB, GENIUS</h2>
+            </div>
+          )}
+
+          {(score < 2 || isPwned) && (
+            <div className="fix-password-container">
+              <button 
+                className="generate-random-btn" 
+                onClick={handleFixPassword}
+              >
+                Fix it for me!
+              </button>
+            </div>
+          )}
+          
         </div>
-      )
-      }
+      )}
+
       <div id="metrics"/>
-        <ScoreMetrics strengthResult={strengthResult} />
-      </section></>
-  )
+      <ScoreMetrics strengthResult={strengthResult} />
+    </section>
+  </>
+)
 }
