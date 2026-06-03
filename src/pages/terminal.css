@@ -1,0 +1,130 @@
+.terminal-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+.terminal-screen{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0c0c0c;
+  color: #00ff00;
+  font-family: Courier New, Courier, monospace;
+  box-sizing: border-box;
+  overflow-Y: auto;
+  z-index: 10
+}
+.terminal-text{
+  background-color: transparent;
+  border: none;
+  color: #00ff00;
+  font-family: Courier New, Courier, monospace;
+  font-size: 16px;
+  outline: none;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+}
+
+.terminal-display {
+  text-align: left;
+  flex-grow: 1;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  padding-left: 15px;
+  border: 2px dashed #004400;
+}
+
+.terminal-container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: #0c0c0c;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.terminal-main-area {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+  height: 0;
+  gap: 20px;
+}
+
+.terminal-bottom-area {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 2px dashed #004400;
+  height: 200px;
+  overflow-y: auto;
+}
+
+.terminal-user-info {
+  width: 250px;
+  border: 2px dashed #004400;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+
+.terminal-input-form {
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+}
+
+.terminal-input-history {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+  color: #00aa00;
+  text-align: left;
+}
+
+.terminal-prompt {
+  margin-right: 10px;
+  user-select: none;
+  white-space: nowrap;
+  color: #00ff00;
+}
+
+
+
+/* ==========================================================================
+                                SUWAK W DISPLAYU
+   ========================================================================== */
+
+.terminal-display::-webkit-scrollbar {
+  width: 8px;
+  background-color: #0c0c0c;
+}
+
+.terminal-display::-webkit-scrollbar-track {
+  background: #0c0c0c;
+  border-left: 1px dashed #004400;
+}
+
+.terminal-display::-webkit-scrollbar-thumb {
+  background-color: #004400;
+  border-radius: 4px;
+  border: 1px solid #00ff00;
+}
+
+.terminal-display::-webkit-scrollbar-thumb:hover {
+  background-color: #00aa00;
+  cursor: pointer;
+}
