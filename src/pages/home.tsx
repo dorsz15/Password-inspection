@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef} from 'react';
 import { breachStories} from '../components/BreachedStories';
 import { scrollToSection } from '../Navigator';
-import {KeyRound, ChartBar, Dices, ShieldHalf, Users} from 'lucide-react';
+import {KeyRound, ChartBar, Dices, ShieldHalf, Users, SquareTerminal} from 'lucide-react';
 import { NeatGradient } from "@firecms/neat";
 
 import '../App.css';
+import Terminal from './terminal';
 import PasswordAnalyzer from '../components/PasswordAnalyzer';
 import PasswordGenerator from '../components/PasswordGenerator';
 import Footer from '../components/Footer';
@@ -141,6 +142,13 @@ function Home() {
           GENERATOR
         </button>
 
+        {/* Button to terminal*/}
+        <button className="navbar-button" 
+                onClick={() => scrollToSection('terminal')}>
+          <SquareTerminal size={20} className="nav-icon" />
+          TERMINAL
+        </button>
+
         {/* Button to  github*/}
         <button className="navbar-button" 
                 onClick={() => scrollToSection('authors')}>
@@ -168,93 +176,101 @@ function Home() {
           <PasswordGenerator 
             onSendToAnalyzer={handleSendToAnalyzer}/>
           
-          <div className="app-divider" />
+          <div id="terminal" className="app-divider" />
 
-        {/* Sekcja: Why make a secure password */}
-        <section className="info-section">
-        <h2 className="info-title">WHY MAKE A SECURE PASSWORD?</h2>
-        <div className="info-content">
-          <p>
-            Your password is the first line of defense against cyber threats. In an era where 
-            data breaches occur daily, using weak or recycled passwords leaves your personal 
-            information, financial accounts, and digital identity highly vulnerable to hackers. 
-            A robust password acts as a strong barrier, significantly reducing the risk of unauthorized access.
-          </p>
-          <p>
-            Automated cyberattacks, such as brute-force and dictionary attacks, can crack simple passwords 
-            in a matter of seconds. By incorporating a mix of upper and lowercase letters, numbers, and 
-            special characters, you exponentially increase the complexity and entropy of your credentials, 
-            making it mathematically exhausting for malicious scripts to guess them.
-          </p>
-          <p>
-            Securing your accounts goes beyond protecting just yourself. Compromised accounts are 
-            frequently used to spread malware, launch phishing campaigns against your contacts, or gain 
-            footholds into corporate networks. Investing a few moments into creating unique, complex 
-            passwords is a crucial step toward building a safer digital environment for everyone.
-          </p>
-        </div>
-      </section>
-
-      <hr className="app-divider" />
-
-      {/* Sekcja: Fun facts */}
-     <section className="info-section">
-      <h2 className="info-title">FUN FACTS ABOUT PASSWORD SECURITY</h2>
-      
-      {/* Kontener nadrzędny z relative, żeby przyciski były wewnątrz niego */}
-      <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-        
-        {/* Karta z sztywną szerokością 950px */}
-        <div className="info-card" style={{ width: '950px', position: 'relative' }}>
-          
-          {/* Przycisk < - teraz wewnątrz karty, wyśrodkowany pionowo */}
-          <button 
-            onClick={prevFact} 
-            style={{ 
-              position: 'absolute', left: '-75px', top: '50%', transform: 'translateY(-50%)',
-              background: 'transparent', border: '1px solid #96ADFF', color: '#96ADFF', 
-              cursor: 'pointer', fontSize: '20px', width: '50px', height: '50px',
-              borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
-            }}
-          >
-            {"<"}
-          </button>
-
-          {/* Treść karty */}
-          <h3 style={{ margin: '0 0 10px 0', fontSize: '22px', textTransform: 'uppercase', letterSpacing: '1px', color: '#white' }}>
-            {currentFact.company}
-          </h3>
-          <h2 style={{ fontSize: '20px', marginBottom: '25px', color: '#white' }}>
-            {currentFact.title}
-          </h2>
-          <p style={{ lineHeight: '1.6', fontSize: '20px', color: '#96ADFF' }}>
-            {currentFact.description}
-          </p>
-          <div style={{ textAlign: 'center', marginTop: '10px', fontSize: '20px', opacity: 0.5 }}>
-            Fact {factIndex + 1} / {breachStories.length}
+          <div className="info-title">SUPER SECRET TERMINAL WITH NO PASSWORD HACKING COMMANDS</div>
+          <div  className="terminal-wrapper">
+            <Terminal />
           </div>
 
-          {/* Przycisk > - wewnątrz karty, wyśrodkowany pionowo */}
-          <button 
-            onClick={nextFact} 
-            style={{ 
-              position: 'absolute', right: '-75px', top: '50%', transform: 'translateY(-50%)',
-              background: 'transparent', border: '1px solid #96ADFF', color: '#96ADFF', 
-              cursor: 'pointer', fontSize: '20px', width: '50px', height: '50px',
-              borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
-            }}
-          >
-            {">"}
-          </button>
+          <div className="app-divider" />
 
+          {/* Sekcja: Why make a secure password */}
+          <section className="info-section">
+          <h2 className="info-title">WHY MAKE A SECURE PASSWORD?</h2>
+          <div className="info-content">
+            <p>
+              Your password is the first line of defense against cyber threats. In an era where 
+              data breaches occur daily, using weak or recycled passwords leaves your personal 
+              information, financial accounts, and digital identity highly vulnerable to hackers. 
+              A robust password acts as a strong barrier, significantly reducing the risk of unauthorized access.
+            </p>
+            <p>
+              Automated cyberattacks, such as brute-force and dictionary attacks, can crack simple passwords 
+              in a matter of seconds. By incorporating a mix of upper and lowercase letters, numbers, and 
+              special characters, you exponentially increase the complexity and entropy of your credentials, 
+              making it mathematically exhausting for malicious scripts to guess them.
+            </p>
+            <p>
+              Securing your accounts goes beyond protecting just yourself. Compromised accounts are 
+              frequently used to spread malware, launch phishing campaigns against your contacts, or gain 
+              footholds into corporate networks. Investing a few moments into creating unique, complex 
+              passwords is a crucial step toward building a safer digital environment for everyone.
+            </p>
+          </div>
+        </section>
+
+        <hr className="app-divider" />
+
+        {/* Sekcja: Fun facts */}
+      <section className="info-section">
+        <h2 className="info-title">FUN FACTS ABOUT PASSWORD SECURITY</h2>
+        
+        {/* Kontener nadrzędny z relative, żeby przyciski były wewnątrz niego */}
+        <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+          
+          {/* Karta z sztywną szerokością 950px */}
+          <div className="info-card" style={{ width: '950px', position: 'relative' }}>
+            
+            {/* Przycisk < - teraz wewnątrz karty, wyśrodkowany pionowo */}
+            <button 
+              onClick={prevFact} 
+              style={{ 
+                position: 'absolute', left: '-75px', top: '50%', transform: 'translateY(-50%)',
+                background: 'transparent', border: '1px solid #96ADFF', color: '#96ADFF', 
+                cursor: 'pointer', fontSize: '20px', width: '50px', height: '50px',
+                borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
+              }}
+            >
+              {"<"}
+            </button>
+
+            {/* Treść karty */}
+            <h3 style={{ margin: '0 0 10px 0', fontSize: '22px', textTransform: 'uppercase', letterSpacing: '1px', color: '#white' }}>
+              {currentFact.company}
+            </h3>
+            <h2 style={{ fontSize: '20px', marginBottom: '25px', color: '#white' }}>
+              {currentFact.title}
+            </h2>
+            <p style={{ lineHeight: '1.6', fontSize: '20px', color: '#96ADFF' }}>
+              {currentFact.description}
+            </p>
+            <div style={{ textAlign: 'center', marginTop: '10px', fontSize: '20px', opacity: 0.5 }}>
+              Fact {factIndex + 1} / {breachStories.length}
+            </div>
+
+            {/* Przycisk > - wewnątrz karty, wyśrodkowany pionowo */}
+            <button 
+              onClick={nextFact} 
+              style={{ 
+                position: 'absolute', right: '-75px', top: '50%', transform: 'translateY(-50%)',
+                background: 'transparent', border: '1px solid #96ADFF', color: '#96ADFF', 
+                cursor: 'pointer', fontSize: '20px', width: '50px', height: '50px',
+                borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
+              }}
+            >
+              {">"}
+            </button>
+
+          </div>
         </div>
-      </div>
-    </section>
-      </div>
+      </section>
+    </div>
+
       
-      {/* Stopka*/}
-      <Footer />
-      <div id="authors"/>
+    {/* Stopka*/}
+    <Footer />
+    <div id="authors"/>
 
     </>
   );

@@ -1,26 +1,31 @@
 .terminal-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
+  display: flex;
+  background-color: #0c0c0c;
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
 }
 .terminal-screen{
-  position: fixed;
+  position: relative;
   top: 0px;
   left: 0px;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: #0c0c0c;
-  color: #00ff00;
+  color: var(--text);
   font-family: Courier New, Courier, monospace;
   box-sizing: border-box;
   overflow-Y: auto;
-  z-index: 10
 }
 .terminal-text{
   background-color: transparent;
   border: none;
-  color: #00ff00;
+  color: var(--text);
   font-family: Courier New, Courier, monospace;
   font-size: 16px;
   outline: none;
@@ -35,20 +40,7 @@
   overflow-y: auto;
   white-space: pre-wrap;
   padding-left: 15px;
-  border: 2px dashed #004400;
-}
-
-.terminal-container {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background-color: #0c0c0c;
-  color: #00ff00;
-  font-family: 'Courier New', Courier, monospace;
-  padding: 20px;
-  box-sizing: border-box;
+  border: 2px dashed var(--input);
 }
 
 .terminal-main-area {
@@ -66,14 +58,14 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  border: 2px dashed #004400;
+  border: 2px dashed var(--input);
   height: 200px;
   overflow-y: auto;
 }
 
 .terminal-user-info {
   width: 250px;
-  border: 2px dashed #004400;
+  border: 2px dashed var(--input);
   box-sizing: border-box;
   padding: 5px;
 }
@@ -91,7 +83,7 @@
   flex-direction: column;
   gap: 5px;
   margin-bottom: 5px;
-  color: #00aa00;
+  color: var(--input);
   text-align: left;
 }
 
@@ -99,7 +91,7 @@
   margin-right: 10px;
   user-select: none;
   white-space: nowrap;
-  color: #00ff00;
+  color: var(--text);
 }
 
 
@@ -115,17 +107,17 @@
 
 .terminal-display::-webkit-scrollbar-track {
   background: #0c0c0c;
-  border-left: 1px dashed #004400;
+  border-left: 1px dashed var(--input);
 }
 
 .terminal-display::-webkit-scrollbar-thumb {
-  background-color: #004400;
+  background-color: var(--input);
   border-radius: 4px;
-  border: 1px solid #00ff00;
+  border: 1px solid var(--text);
 }
 
 .terminal-display::-webkit-scrollbar-thumb:hover {
-  background-color: #00aa00;
+  background-color: var(--text);
   cursor: pointer;
 }
 
@@ -137,7 +129,7 @@
   height: 150px;
   overflow-y: auto;
   background: #030303;
-  border: 1px dashed #004400;
+  border: 1px dashed var(--input);
   padding: 5px;
   font-size: 0.8rem;
 }
@@ -149,17 +141,17 @@
 
 .cracker-logs-window::-webkit-scrollbar-track {
   background: #0c0c0c;
-  border-left: 1px dashed #004400;
+  border-left: 1px dashed var(--input);
 }
 
 .cracker-logs-window::-webkit-scrollbar-thumb {
-  background-color: #004400;
+  background-color: var(--input);
   border-radius: 4px;
-  border: 1px solid #00ff00;
+  border: 1px solid var(--text);
 }
 
 .cracker-logs-window::-webkit-scrollbar-thumb:hover {
-  background-color: #00aa00;
+  background-color: var(--text);
   cursor: pointer;
 }
 
@@ -168,12 +160,12 @@
    ========================================================================== */
 
 .info-box-header {
-  color: #00ff00;
+  color: var(--blue-text);
   font-weight: bold;
   font-size: 0.9rem;
   letter-spacing: 1px;
   margin-bottom: 8px;
-  border-bottom: 1px dashed #004400;
+  border-bottom: 1px dashed var(--input);
   padding-bottom: 3px;
 }
 
@@ -186,15 +178,15 @@
 }
 
 .info-label {
-  color: #008800;
+  color: var(--blue-text);
 }
 
 .info-value {
-  color: #00ff00;
+  color: var(--text);
 }
 
 .user-highlight {
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+  text-shadow: 0 0 5px var(--blue-text);
   font-weight: bold;
 }
 
@@ -205,7 +197,7 @@
 }
 
 .auth-badge.guest {
-  color: #00ff00;
+  color: var(--text);
   font-weight: normal;
 }
 

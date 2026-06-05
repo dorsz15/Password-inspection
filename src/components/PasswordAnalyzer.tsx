@@ -176,17 +176,6 @@ return (
               <h2 className="shock-title animate-pulse">YOUR PASSWORD IS ON THE DARK WEB, GENIUS</h2>
             </div>
           )}
-
-          {(score < 2 || isPwned) && (
-            <div className="fix-password-container">
-              <button 
-                className="generate-random-btn" 
-                onClick={handleFixPassword}
-              >
-                Fix it for me!
-              </button>
-            </div>
-          )}
           
         </div>
       )}

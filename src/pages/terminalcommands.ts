@@ -37,7 +37,16 @@ export const COMMAND_DICTIONARY: Record<string, BaseCommand> = {
 - "help"     : Show this advanced menu
 - "clear"    : Purge terminal logs from screen
 - "scan"     : Run local environment vulnerability check
-- "system"   : Display host machine architecture specifications`),
+- "system"   : Display host machine architecture specifications
+- "ls"       : Display virtual directory tree structure
+- "cat"      : Read content of a specific file (usage: cat [path])
+- "users"    : Display all system profiles and authorization status
+- "newuser"  : Create a new system profile (usage: newuser [user] [pass])
+- "deluser"  : Wipe a profile and its workspace (usage: deluser [user])
+- "login"    : Authenticate existing profile (usage: login [user] [pass])
+- "install"  : Install software packages into directory (usage: install [pkg])
+- "run"      : Execute an installed application (usage: run [app.exe])
+- "frog"     : Display the digital frog guardian`),
 scan: new BaseCommand(
     'scan',
     'Run local environment vulnerability check',
@@ -148,6 +157,45 @@ users: new BaseCommand(
     }
   ),
 
+  deluser: new BaseCommand(
+    'deluser',
+    'Delete existing user profile and its directory',
+    (args, ctx) => {
+      if (!ctx) return 'Context error.';
+
+      const username = args?.toLowerCase().trim();
+
+      if (!username) {
+        return 'Usage: deluser [username]';
+      }
+
+      if (!SYSTEM_USERS[username]) {
+        return `[ ERROR ] Profile "${username}" does not exist in the system database.`;
+      }
+
+      delete SYSTEM_USERS[username];
+
+      const dirIndex = VIRTUAL_ROOT.subDirectories.findIndex(
+        dir => dir.name.toLowerCase() === username
+      );
+      if (dirIndex !== -1) {
+        VIRTUAL_ROOT.subDirectories.splice(dirIndex, 1);
+      }
+
+      ctx.setUnlockedUsers(prev => prev.filter(user => user !== username));
+
+      if (ctx.currentUser?.username.toLowerCase() === username) {
+        ctx.setCurrentUser(null);
+        ctx.setIsSystemLocked(true);
+        return `[ WARNING ] Profile "${username}" and its virtual files have been purged.\n` +
+               `[ SYS ] You deleted your current active session. System is now LOCKED.`;
+      }
+
+      return `[ SUCCESS ] Profile "${username}" completely wiped from internal tables.\n` +
+             `Removed personal directory: root/${username}/`;
+    }
+  ),
+
  login: new BaseCommand(
     'login',
     'Authenticate existing profile',
@@ -200,10 +248,10 @@ users: new BaseCommand(
         targetFileName = 'PasswordCracker.exe';
       } 
       else if (fullArgs === 'Cambridge -key:PROMO-CODE-99X2-CAMB') {
-        targetFileName = 'Cambridge.bin';
+        targetFileName = 'Cambridge.exe';
       } 
       else if (fullArgs === 'TasteTheRainbow -key:RAINBOW-TASTE-2026-X77F-PLACE') {
-        targetFileName = 'Rainbow.bin';
+        targetFileName = 'TasteTheRainbow.exe';
       } 
       // Zabezpieczenie: jeśli wpisał dobrą nazwę, ale zły klucz
       else if (fullArgs.startsWith('Cambridge')) {
@@ -273,6 +321,13 @@ users: new BaseCommand(
         ctx.setActiveApp('password_cracker');
         return `[ LAUNCHING ] Executing ${fileName}... entering graphical overlay interface.`;
       }
+      // Obsługa konkretnej aplikacji: Cambridge.exe
+      if (fileName.toLowerCase() === 'cambridge.exe') {
+        // Zmieniamy stan aktywnej aplikacji – React podmieni okno displayowe
+        ctx.setActiveApp('password_cracker');
+        return `[ LAUNCHING ] Executing ${fileName}... entering graphical overlay interface.`;
+      }
+      
       return `[ ERROR ] "${fileName}" is not a recognized executable system application.`;
     }
   ),
