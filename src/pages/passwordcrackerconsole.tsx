@@ -54,8 +54,13 @@ export const PasswordCrackerConsole: React.FC<CrackerProps> = ({ currentUser, on
     'password', 'qwerty', 'querty', 'drowssap', 'secret', 'password123', 'admin', 'admin1', 'login',
     'iloveyou', 'princess', 'monkey', 'forever', 'superman', 'shadow', 'dracula', 'michael', 'jessica',
     'charlie', 'harley', 'football', 'soccer', 'pokemon', 'matrix', 'hunter2', 'welcome', 'letmein',
-    'polska', 'haslo123', 'dupa123', 'kochamcie', 'marcin', 'kasia', 'buziaki',
-    '2000', '1999', '1998', '2026', '2025', '2024',
+    'haslo123', 'marcin', 'kasia','2000', '1999', '1998', '2026', '2025', '2024',"password", "admin1",
+    "qwerty", "monkey", "secret", "123456", "letmein", "cyberdog", "London2026", "kermit",
+    "quack99", "password123", "dragon", "master", "backup", "shadow", "matrix", "hunter2", "football", 
+    "princess", "superman", "database", "system", "access", "override", "decrypt", "cipher", "security",
+    "quantum", "interface", "terminal", "rootAdmin", "welcome", "ninja", "wizard", "phoenix", "hacker",
+    "anonymous", "netscan","payload", "exploit", "firewall", "protocol", "mainframe", 
+    "bypass", "glitch", "banzai", "croaker",
     ...Object.values(SYSTEM_USERS).map((u: any) => u.password)
   ];
   

@@ -1,5 +1,5 @@
 {
-  "name": "Password Fortress Dev Box",
+  "name": "Password Inspection Dev Box",
   "dockerComposeFile": "../docker-compose.yaml",
   "service": "web",
   "workspaceFolder": "/app",

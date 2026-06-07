@@ -16,6 +16,6 @@ export class TerminalUser {
 
 export const SYSTEM_USERS: Record<string, TerminalUser> = {
   admin: new TerminalUser('admin', 'secret123', 'admin'),
-  first: new TerminalUser('brute_force', 'Jezuslubiplacki', 'guest'),
-  second: new TerminalUser('rainbow', 'Motorrobibrumbrum', 'guest')
+  brute_force: new TerminalUser('brute_force', 'fc', 'guest'),
+  rainbow: new TerminalUser('rainbow', 'CommonPassword', 'guest')
 };

@@ -27,7 +27,7 @@ export default function Terminal() {
 
   return lines.map((line, index) => {
     
-    if (line.includes('[FOLDER]') && unlockedUsers.some(user => line.includes(user))) {
+    if (line.includes('[FOLDER]')) {
       return createTreeLine(
         line, 
         '[FOLDER]', 
@@ -35,14 +35,14 @@ export default function Terminal() {
         index
       );
     }
-    if (line.includes('[FOLDER]')) {
-  return createTreeLine(
-    line, 
-    '[FOLDER]', 
-    <FolderLock size={16} color="#ff5555" style={{ marginRight: '6px', display: 'inline-block' }} />, 
-    index
-  );
-}
+  //  if (line.includes('[FOLDER]')) {
+  //return createTreeLine(
+  //  line, 
+  //  '[FOLDER]', 
+  //  <FolderLock size={16} color="#ff5555" style={{ marginRight: '6px', display: 'inline-block' }} />, 
+  //  index
+  //);
+//}
     if (line.includes('[FILE]')) {
       return createTreeLine(
         line, 

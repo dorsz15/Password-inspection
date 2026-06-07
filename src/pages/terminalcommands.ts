@@ -247,18 +247,18 @@ users: new BaseCommand(
       if (fullArgs === 'PasswordCracker') {
         targetFileName = 'PasswordCracker.exe';
       } 
-      else if (fullArgs === 'Cambridge -key:PROMO-CODE-99X2-CAMB') {
+      else if (fullArgs === 'Cambridge') {
         targetFileName = 'Cambridge.exe';
       } 
-      else if (fullArgs === 'TasteTheRainbow -key:RAINBOW-TASTE-2026-X77F-PLACE') {
+      else if (fullArgs === 'TasteTheRainbow') {
         targetFileName = 'TasteTheRainbow.exe';
       } 
       // Zabezpieczenie: jeśli wpisał dobrą nazwę, ale zły klucz
       else if (fullArgs.startsWith('Cambridge')) {
-        return '[ REJECTED ] Invalid license key or wrong syntax. Expected: install Cambridge -key:PROMO-XXXX';
+        return '[ REJECTED ] Invalid license key or wrong syntax. Expected: install Cambridge';
       } 
       else if (fullArgs.startsWith('TasteTheRainbow')) {
-        return '[ REJECTED ] Invalid enterprise key or wrong syntax. Expected: install TasteTheRainbow -key:RAINBOW-XXXX';
+        return '[ REJECTED ] Invalid enterprise key or wrong syntax. Expected: install TasteTheRainbow';
       } 
       else {
         return `[ ERROR ] Unknown package or syntax error: "${fullArgs}"`;
