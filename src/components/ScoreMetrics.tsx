@@ -58,7 +58,7 @@ export default function ScoreMetrics({ strengthResult }: ScoreMetricsProps) {
     { label: 'HARD TO CRACK', value: metrics.hardToCrack },
     { label: 'COMPLEXITY', value: metrics.complexity},
     { label: 'DICTIONARY RESISTANCE', value: metrics.dictionary},
-    { label: 'SPACIAL PATTERNS', value: metrics.spatial},
+    { label: 'SPATIAL PATTERNS', value: metrics.spatial},
     { label: 'N-GRAM FREQUENCY', value: metrics.ngram}
   ];
 
