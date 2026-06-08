@@ -87,7 +87,19 @@ const handleGenerate = () => {
           <input 
             type="number" 
             value={passwordLength} 
-            onChange={(e) => setPasswordLength(Math.min(Math.max(Number(e.target.value), 1), 100))}
+            onChange={(e) => {
+    const val = e.target.value;
+    
+    // Jeśli pole jest puste (użytkownik wszystko skasował), pozwól na to (ustaw 0)
+    if (val === '') {
+      setPasswordLength(0);
+      return;
+    }
+
+    const num = Number(val);
+    // Pozwalamy wpisać cokolwiek do 100 (blokada dolna zadziała dopiero przy generowaniu)
+    setPasswordLength(Math.min(num, 100));
+  }}
             className="length-number-input"
           />
         </div>

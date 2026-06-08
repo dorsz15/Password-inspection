@@ -37,7 +37,7 @@ export default function ScoreMetrics({ strengthResult }: ScoreMetricsProps) {
   const ngram = hasRepeat ? 1 : Math.min(lengthBonus * 1.1, 10); // nieco szybszy wzrost
 
   // Uśredniony wynik ogólny
-  const overall = (hardToCrack + complexity + dictionary + spatial + ngram) / 5;
+  const overall = hardToCrack;
 
 
 
@@ -55,7 +55,6 @@ export default function ScoreMetrics({ strengthResult }: ScoreMetricsProps) {
   };
   
   const metricsList = [
-    { label: 'HARD TO CRACK', value: metrics.hardToCrack },
     { label: 'COMPLEXITY', value: metrics.complexity},
     { label: 'DICTIONARY RESISTANCE', value: metrics.dictionary},
     { label: 'SPATIAL PATTERNS', value: metrics.spatial},
